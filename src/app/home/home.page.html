@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>CuentaPasos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Menu</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Botón Crear Grupo -->
+      <ion-button expand="full" (click)="crearGrupo()">
+        Crear Grupo
+      </ion-button>
+
+      <!-- Botón Unirse a un Grupo -->
+      <ion-button expand="full" (click)="unirseGrupo()">
+        Unirse a un Grupo
+      </ion-button>
+
+      <!-- Botón Ver Ruta con Más Pasos -->
+      <ion-button expand="full" (click)="verRutaConMasPasos()">
+        Ver Ruta con Más Pasos
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

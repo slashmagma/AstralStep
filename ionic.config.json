@@ -1,0 +1,7 @@
+{
+  "name": "appmovil3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
