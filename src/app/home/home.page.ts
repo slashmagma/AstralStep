@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FirebaseLoginService } from '../servicios/firebase-login.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,24 +10,21 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() { }
-
-  crearGrupo() {
-    // Lógica para crear un grupo
-    console.log('Crear grupo');
-    // Puedes agregar aquí la lógica para la creación del grupo
+  constructor( private router:Router,private logoutFirebase:FirebaseLoginService, public toast:ToastController) { }
+ 
+  competencia(){this.router.navigate(["/competir"])} 
+  estadisticas(){this.router.navigate(["/estadisticas"])}  
+  
+  async cerrarsession() {
+    const toast = await this.toast.create({
+      message: 'session cerrada',
+      duration: 2000
+    });
+    toast.present();
   }
 
-  unirseGrupo() {
-    // Lógica para unirse a un grupo
-    console.log('Unirse a un grupo');
-    // Puedes agregar aquí la lógica para unirse a un grupo
+  logout(){
+    this.logoutFirebase.logout()
+    this.cerrarsession()
   }
-
-  verRutaConMasPasos() {
-    // Lógica para ver la ruta con más pasos
-    console.log('Ver ruta con más pasos');
-    // Puedes agregar aquí la lógica para mostrar la ruta con más pasos
-  }
-
 }

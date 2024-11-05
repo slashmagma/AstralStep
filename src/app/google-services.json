@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1031779565320",
+    "project_id": "fir-9e5e8",
+    "storage_bucket": "fir-9e5e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031779565320:android:bec515d2a7fe3625b3b6bd",
+        "android_client_info": {
+          "package_name": "movil.duoc_secion5"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAPB8cR54I8IcIxJkjWxfQ32u-I9xbc7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

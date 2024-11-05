@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { usuarioI } from '../modelos/models';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FirebasesignupService } from '../servicios/firebasesignup.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FirebaseLoginService } from '../servicios/firebase-login.service';
+import { AlertController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -7,29 +13,72 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
+  
+  datos: usuarioI = {
+  nombre: null ,
+  correo: null ,
+  uid: null,
+  password: null,
+ }
+  
+  constructor(public alerta:AlertController,private router:Router,private afAtuh:AngularFireAuth, private logout:FirebaseLoginService,private firesignup:FirebasesignupService,public toast:ToastController) { }
 
-  registroForm: FormGroup;
-
-  constructor(private fb: FormBuilder) { 
-    this.registroForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    });
+  ngOnInit() {
   }
+  
+async Registrar(){
+    this.firesignup.registrarusu(this.datos).then(cred =>{
+      this.MensajeCorrecto()
+      this.router.navigate(["/login1"])
+    }).catch(error =>{
+      const errorcode = error.code;
+        
+      if (errorcode == 'auth/email-already-in-use'){ console.log("email")
+        this.correoUsado()
+       }
+       /*////////////////////////colocar un error si hay contraseñas repetidos *////////////////////////
+      else if(errorcode == 'auth-invalid-email')
+        this.correoInvalido()
 
-  ngOnInit() {}
 
-  registrar() {
-    if (this.registroForm.valid) {
-      const { username, email, password } = this.registroForm.value;
-      // Lógica para registrar al usuario
-      console.log('Nombre de usuario:', username);
-      console.log('Email:', email);
-      console.log('Contraseña:', password);
-      // Aquí puedes agregar la llamada al servicio para registrar al usuario
-    } else {
-      console.log('Formulario no válido');
+      else if(errorcode == 'auth/weak-password')
+       this.contraError()
+    })
+
     }
-  }
+
+    async correoUsado(){
+      const alert = await this.alerta.create({
+        header: 'error de registro',
+        message: 'el correo ya esta en uso',
+        buttons: ['Aceptar']
+      });
+    
+      await alert.present();
+    }
+    async correoInvalido(){
+      const alert = await this.alerta.create({
+        header: 'error de registro',
+        message: 'el correo es invalido',
+        buttons: ['Aceptar']
+      });
+    
+      await alert.present();
+    }
+    async contraError(){
+      const alert = await this.alerta.create({
+        header: 'error de registro',
+        message: 'la contraseña nesesitar ser de 6 caracteres minimo',
+        buttons: ['Aceptar']
+      });
+    
+      await alert.present();
+    }
+    async MensajeCorrecto() {
+      const toast = await this.toast.create({
+        message: 'usuario creado',
+        duration: 2000
+      });
+      toast.present();
+    }
 }

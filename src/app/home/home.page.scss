@@ -1,83 +1,8 @@
-/* Animación de rebote */
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
 
-/* Animación de escala */
-@keyframes scale {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+ion-text{
+    padding-left: 38%;}
 
-/* Estilos base para los botones */
-.animated-button {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  font-size: 16px;
-  font-weight: bold;
-
-  &:hover {
-    animation: bounce 0.6s;
-  }
-
-  &:active {
-    animation: scale 0.2s;
-  }
-}
-
-/* Estilos específicos para cada botón */
-.create-group {
-  background-color: #3880ff;
-  color: white;
-
-  &:hover {
-    background-color: #3171e0;
-  }
-
-  &:active {
-    background-color: #2861c1;
-  }
-}
-
-.join-group {
-  background-color: #10dc60;
-  color: white;
-
-  &:hover {
-    background-color: #0cb64d;
-  }
-
-  &:active {
-    background-color: #09a944;
-  }
-}
-
-.view-route {
-  background-color: #f4a300;
-  color: white;
-
-  &:hover {
-    background-color: #e39d00;
-  }
-
-  &:active {
-    background-color: #d78d00;
-  }
+.menu{
+padding-left: 100px;
+width: 40%;
 }

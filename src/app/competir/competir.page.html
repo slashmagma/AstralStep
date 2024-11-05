@@ -1,0 +1,20 @@
+<app-header></app-header>
+<ion-content>
+  <ion-button class="pag" (click)='estadisticas()'  ><ion-text class="estadisticas">mis estadisticas</ion-text></ion-button>
+  <ion-button class="comp" disabled>competir</ion-button>
+  <ion-button class="ded" disabled>desafios</ion-button>
+  <div id="map"></div>  
+  <ion-button (click)="calculateDistance()">Calcular Distancia</ion-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información de Ruta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Distancia:</strong> {{ distance }}</p>
+      <p><strong>Duración:</strong> {{ duration }}</p>
+      <p>Total de kilómetros recorridos: {{ totalDistance | number:'1.2-2' }} km</p>
+    </ion-card-content>
+  </ion-card>
+<ion-content>
+
+  

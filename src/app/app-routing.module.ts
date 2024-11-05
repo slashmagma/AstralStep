@@ -7,8 +7,15 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'inicio',
+    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+  {path: 'registro',
+  loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+},
+  {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'login1',
     pathMatch: 'full'
   },
   {
@@ -19,6 +26,24 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
+  {
+    path: 'login1',
+    loadChildren: () => import('./login1/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },  {
+    path: 'competir',
+    loadChildren: () => import('./competir/competir.module').then( m => m.CompetirPageModule)
+  },
+  {
+    path: 'estadisticas',
+    loadChildren: () => import('./estadisticas/estadisticas.module').then( m => m.EstadisticasPageModule)
+  },
+
+
+
 ];
 
 @NgModule({

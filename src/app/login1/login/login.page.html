@@ -1,0 +1,24 @@
+<ion-app>
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-text> Login </ion-text>
+<ion-item>
+  <ion-input name="correo" label="correo" [(ngModel)]="correo" placeholder="correo " type="text"></ion-input>
+</ion-item> 
+<ion-item>
+  <ion-input name="contraseña" label="password" [(ngModel)]="password" placeholder="Ingresa tu contraseña" type="password"></ion-input>
+</ion-item>
+ <ion-button (click)="ingresar()" expand="block"  shape="round"> 
+entrar
+ </ion-button>
+</ion-content>
+
+
+
+<ion-footer><ion-toolbar> no tienes cuenta? <a class="link" routerLink="/registro"> crear cuenta </a>
+</ion-toolbar></ion-footer>
+</ion-app>
