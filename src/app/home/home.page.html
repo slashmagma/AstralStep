@@ -1,12 +1,26 @@
 
 <ion-app>
-<app-header> </app-header>
+<app-header>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="backButton" color="dark"></ion-back-button>
+  </ion-buttons> 
+</app-header>
      
 <ion-content><ion-button class="estadisticas" (click)='estadisticas()'>mis estadisticas</ion-button>
 <ion-button class="comp"  (click)='competencia()'>competir</ion-button>
 <ion-button class="ded"disabled>desafios</ion-button></ion-content>
 
-  
+<ion-content>
+  <div class="step-counter">
+    <h2>Pasos Contados:</h2>
+    <p>{{ getSteps() }}</p> <!-- Muestra el número de pasos -->
+    
+    <!-- Botón para iniciar/detener el seguimiento -->
+    <ion-button (click)="toggleStepTracking()">
+      {{ tracking ? 'Detener' : 'Iniciar' }} Seguimiento
+    </ion-button>
+  </div>
+</ion-content>
 <ion-footer>
     <ion-toolbar>
         <ion-button (click)="logout()" >

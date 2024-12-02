@@ -1,8 +1,6 @@
 <ion-header>
-    <ion-button id="back" (click)="volver()" >
-       volver
-    </ion-button>
+   <ion-back-button (click)="volver()" [defaultHref]="backUrl" *ngIf="backbutton" color="dark"></ion-back-button>
  <ion-text>astral step</ion-text>
-<ion-button class="menu"> menu</ion-button>
+
 </ion-header>
 

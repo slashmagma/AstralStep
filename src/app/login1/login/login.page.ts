@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
+import { usuarioI } from 'src/app/modelos/models';
+import { ApiService } from 'src/app/servicios/api.service';
 
 @Component({
   selector: 'app-login',
@@ -9,48 +12,45 @@ import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  correo:string=""
-  password:string=""
+  
+  formulario = new FormGroup({
+    uid : new FormControl(''),
+    email: new FormControl('',[Validators.required, Validators.email]),
+    password: new FormControl('',[Validators.required]),
+  });
 
-  constructor(public alerta:AlertController, public toast:ToastController, private router:Router,private loginFirebase:FirebaseLoginService) { }
+
+  utilSvc = inject(ApiService);
+  router = inject(Router);
+  loginFirebase = inject(FirebaseLoginService)
+  
 
   ngOnInit() {
   }
-  async MensajeCorrecto() {
-    const toast = await this.toast.create({
-      message: 'inicio de sesion correcto',
-      duration: 2000
-    });
-    toast.present();
-  }
 
-  async MensajeError(){
-      const alert = await this.alerta.create({
-        header: 'error de inicio',
-        message: 'no puede ingresar con los campos de correo y contraseña vacios',
-        buttons: ['Aceptar']
-      });
-    
-      await alert.present();
-    }
-  
 
-ingresar(){
-  if(this.correo ===""|| this.password ===""){
-    console.log("no puede haber valores vacios")
-    this.MensajeError()
-  }
-  else{
-    this.loginFirebase.login(this.correo, this.password).then(()=>{
-      console.log("inicio de sesion exitoso")
-      
-      this.MensajeCorrecto()
-      this.router.navigate(["/home"])
-    }).catch(()=>{
-      console.log("error al iniciar sesion")
-      this.MensajeError();
+async submit(){
+  if (this.formulario.valid){
+    const loading = await this.utilSvc.loading();
+    await loading.present();
+
+    this.loginFirebase.login(this.formulario.value as usuarioI).then(res =>{
+      console.log(res);
+      this.router.navigate(['/home'])
+      localStorage.setItem('ingresado','true');
+
+    }).catch(error =>{
+      console.log(error);
+      this.utilSvc.presentToast({
+        message: error.message,
+        duration:2500,
+        position:'bottom',
+      })
+    }).finally(()=>{
+      loading.dismiss();
     })
 
   }
+  
 }
 }

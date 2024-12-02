@@ -1,24 +1,46 @@
-<ion-app>
-<ion-header>
-  <ion-toolbar>
-    <ion-title> Login</ion-title>
-  </ion-toolbar>
-</ion-header>
 <ion-content>
-  <ion-text> Login </ion-text>
-<ion-item>
-  <ion-input name="correo" label="correo" [(ngModel)]="correo" placeholder="correo " type="text"></ion-input>
-</ion-item> 
-<ion-item>
-  <ion-input name="contraseña" label="password" [(ngModel)]="password" placeholder="Ingresa tu contraseña" type="password"></ion-input>
-</ion-item>
- <ion-button (click)="ingresar()" expand="block"  shape="round"> 
-entrar
- </ion-button>
+  <div class="card">
+
+    <h1 id="login">AstralSteps</h1>
+  </div>
+
+  <div class="middle">
+    <form [formGroup]="formulario" (ngSubmit)="submit()">
+      <div class="box">
+        <p>Porfavor ingrese sus datos</p>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+          <ion-icon class="ion-align-self-center" slot="end" name="person-circle-outline"></ion-icon>
+        </ion-item>
+        <div class="validators" *ngIf="formulario.controls.email.errors && formulario.controls.email.touched">
+            <div *ngIf="formulario.controls.email.errors?.['required']">El correo es requerido</div>
+            <div *ngIf="formulario.controls.email.errors?.['email']">Ingrese un correo valido</div>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+          <ion-icon class="ion-align-self-center" slot="end" name="eye-outline"></ion-icon>
+        </ion-item>
+        <div class="validators" *ngIf="formulario.controls.password.errors && formulario.controls.password.touched">
+          <div *ngIf="formulario.controls.password.errors?.['required']">La Contraseña es requerida</div>
+      </div>
+        <ion-item>
+          <ion-button class="boton-login " color="dark" expand="block" (click)="submit()">Ingresar</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-label class="ion-text-center">
+            ¿No tienes una cuenta? <ion-button [routerLink]="['/registro']" color="dark">Registrate</ion-button>
+          </ion-label>
+          <ion-label class="ion-text-center">
+            ¿Olvido su contraseña? <ion-button [routerLink]="['/recuperar-contra']" color="dark">Recuperar</ion-button>
+          </ion-label>
+        </ion-item>
+      </div>
+    </form>
+  </div>
+
 </ion-content>
 
 
 
-<ion-footer><ion-toolbar> no tienes cuenta? <a class="link" routerLink="/registro"> crear cuenta </a>
-</ion-toolbar></ion-footer>
-</ion-app>
